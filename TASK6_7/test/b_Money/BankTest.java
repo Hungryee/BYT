@@ -37,6 +37,9 @@ public class BankTest {
 	public void testOpenAccount() throws AccountExistsException {
 		// since it exists
 		assertThrows(AccountExistsException.class, () -> SweBank.openAccount("Ulrika"));
+		//it does not exist
+		SweBank.openAccount("Stanislav");
+		assertTrue(SweBank.accountExists("Stanislav"));
 	}
 
 	@Test

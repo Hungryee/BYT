@@ -46,6 +46,10 @@ public class Bank {
 			accountlist.put(accountid, new Account(accountid, this.currency));
 		}
 	}
+
+	public boolean accountExists(String accountid){
+		return this.accountlist.containsKey(accountid);
+	}
 	
 	/**
 	 * Deposit money to an account
