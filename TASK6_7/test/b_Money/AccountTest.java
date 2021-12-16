@@ -25,18 +25,20 @@ public class AccountTest {
 	@Test
 	public void testAddRemoveTimedPayment() {
 		testAccount.addTimedPayment("123", 5,3,new Money(100000, SEK), SweBank, "Alice");
+		assertTrue(testAccount.timedPaymentExists("123"));
+
 		testAccount.removeTimedPayment("123");
+		assertFalse(testAccount.timedPaymentExists("123"));
 	}
 	
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
 		testAccount.addTimedPayment("123", 5,3,new Money(100000, SEK), SweBank, "Alice");
-		testAccount.tick();
-		testAccount.tick();
-		testAccount.tick();
-		testAccount.tick();
+		for (int i = 0; i < 3+1; i++) {
+			testAccount.tick();
+		}
 
-		//transaction completed after 4 ticks
+		//transaction completed on 4th tick
 		assertEquals(new Money(10000000-100000, SEK).getAmount(), testAccount.getBalance().getAmount(),1);
 	}
 

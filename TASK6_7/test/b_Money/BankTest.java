@@ -2,6 +2,7 @@ package b_Money;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
@@ -45,20 +46,26 @@ public class BankTest {
 	@Test
 	public void testDeposit() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class,()->SweBank.deposit("NONAME", new Money(123, SEK)));
+		SweBank.deposit("Ulrika", new Money(10000, SEK));
+		assertEquals(SweBank.getBalance("Ulrika"), 10000,1);
 	}
 
 	@Test
 	public void testWithdraw() throws AccountDoesNotExistException {
 		assertThrows(AccountDoesNotExistException.class,()->SweBank.withdraw("NONAME", new Money(123, SEK)));
+		SweBank.deposit("Ulrika", new Money(10000, SEK));
+
+		SweBank.withdraw("Ulrika", new Money(100, SEK));
+		assertEquals(SweBank.getBalance("Ulrika"), 9900,1);
 	}
-	
+
 	@Test
 	public void testGetBalance() throws AccountDoesNotExistException {
 		assertEquals(0,SweBank.getBalance("Ulrika"),0);
 		SweBank.deposit("Ulrika", new Money(123, SEK));
 		assertEquals(123,SweBank.getBalance("Ulrika"),0);
 	}
-	
+
 	@Test
 	public void testTransfer() throws AccountDoesNotExistException {
 		assertEquals(0,SweBank.getBalance("Ulrika"),0);
@@ -69,7 +76,7 @@ public class BankTest {
 		assertEquals(100,SweBank.getBalance("Ulrika"),1);
 		assertEquals(23,SweBank.getBalance("Bob"),1);
 	}
-	
+
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
 		SweBank.addTimedPayment("Ulrika", "412", 4, 4, new Money(100, SEK), Nordea, "Bob");
