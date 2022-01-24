@@ -8,6 +8,15 @@ public class User {
     private Faculty faculty;
     private int uuid;
 
+    public User(String name, String email, String password, ProfilePicture profile_pic, int semester, Faculty faculty, int uuid) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.profile_pic = profile_pic;
+        this.semester = semester;
+        this.faculty = faculty;
+        this.uuid = uuid;
+    }
 
     public void login(){
         //...
@@ -61,5 +70,13 @@ public class User {
 
     public void setUuid(int uuid) {
         this.uuid = uuid;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
     }
 }

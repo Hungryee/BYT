@@ -4,6 +4,13 @@ public class Payment {
     private Subscription owner;
     private PaymentStatus status;
 
+    public Payment(int uuid, String account_num, Subscription owner) {
+        this.uuid = uuid;
+        this.account_num = account_num;
+        this.owner = owner;
+        this.status = null;
+    }
+
     public int getUuid() {
         return uuid;
     }

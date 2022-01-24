@@ -7,6 +7,12 @@ public class Subscription {
     private Date date_from;
     public Payment payment;
 
+    public Subscription(int uuid, User user, int plan, Date date_from) {
+        this.uuid = uuid;
+        this.user = user;
+        this.plan = plan;
+        this.date_from = date_from;
+    }
 
     public Subscription createSubscription(){
         //...
